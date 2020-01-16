@@ -1,0 +1,65 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
+</head>
+<body>
+    <div ng-controller="TwoFactor.RegisterDashboard">
+        <div ng-if="error != ''" ng-include="'/App_Plugins/TwoFactor/Views/ErrorMessage.html'"></div>
+        <div ng-if="anyAllowed === false">
+            <h1>Not Allowed</h1>
+            <p>2 factor authentication is currently disabled for your account. <br /> If you think this is a mistake, contact your website administrator</p>
+        </div>
+        <div ng-if="anyAllowed === true">
+            <h2>Setup 2 factor</h2>
+            <div ng-if="anyEnabled === false">
+                <p>You can enable 2 factor on you account by adding one of the following options to your account:</p><br />
+            </div>
+            <div ng-if="totpAllowed === true">
+                <h3>Mobile authentication</h3>
+                <div ng-if="addingDevice === false">
+                    <umb-button type="button"
+                                action="addTotpOrCancel()"
+                                button-style="success"
+                                label="Add a mobile device">
+                    </umb-button>
+                </div>
+                <form ng-submit="validateTotpAndSave(totpCode)" ng-if="addingDevice === true">
+                    <div ng-if="QRLoaded === true" id="qr" qr-gen></div>
+                    <br />
+                    {{secret}}
+                    <br />
+                    <input type="text" ng-model="totpCode" />
+                    <br />
+                    <div ng-if="correctCode === false">
+                        code was incorrect<br />
+                    </div>
+                    <umb-button type="submit"
+                                button-style="success"
+                                label="Save Device">
+                    </umb-button>
+                    <umb-button type="button"
+                                action="addTotpOrCancel()"
+                                button-style="danger"
+                                label="Cancel">
+                    </umb-button>
+                </form>
+            </div>
+            <br />
+            <div ng-if="mailAllowed === true">
+                <h3>Mail authentication</h3>
+                <div ng-if="mailEnabled === true">
+                    <p>Mail authentication is already enabled for your account, if you want to disable it go to the manage 2fa section</p>
+                </div>
+                <div ng-if="mailEnabled === false">
+                    <umb-button type="button"
+                                action="saveMail()"
+                                button-style="success"
+                                label="Add mail authentication">
+                    </umb-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

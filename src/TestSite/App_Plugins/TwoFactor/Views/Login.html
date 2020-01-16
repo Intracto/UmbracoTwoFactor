@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div ng-controller="TwoFactor.Login">
+        <div ng-if="!needsAuth">
+            <h1>
+                Authenticating...
+            </h1>
+        </div>
+        <div ng-if="needsAuth">
+            <h1>Second step</h1>
+            <div ng-if="totpEnabled === true">
+                <h2>Mobile authentication</h2>
+                <p>You can login by entering the code on your configured 2fa app</p>
+                <form ng-submit="validateTotp(totpCode)" class="text-center">
+                    <input type="text" ng-model="totpCode" />
+                    <br />
+                    <div ng-if="correctTotpCode === false">
+                        code was incorrect<br />
+                    </div>
+                    <umb-button type="submit"
+                                button-style="success"
+                                label="Validate code">
+                    </umb-button>
+                </form>
+            </div>
+            <div ng-if="mailEnabled === true">
+                <h2>Mail authentication</h2>
+                <p>You can send a mail with your 2fa code, than enter the code here</p>
+                <form ng-submit="validateMail(mailCode)" class="text-center">
+                    <input type="text" ng-model="mailCode" />
+                    <br />
+                    <div ng-if="correctMailCode === false">
+                        code was incorrect<br />
+                    </div>
+                    <umb-button type="button"
+                                action="sendMail()"
+                                button-style="info"
+                                label="Send Email">
+                    </umb-button>
+                    <umb-button type="submit"
+                                button-style="success"
+                                label="Validate code">
+                    </umb-button>
+                </form>
+                <div ng-if="mailSend === true">
+                    <br />
+                    <p>A mail with your 2fa code has been sent to your Email</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

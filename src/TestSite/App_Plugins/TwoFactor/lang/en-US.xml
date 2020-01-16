@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"  standalone="yes"?>
+<language>
+  <area alias="dashboardTabs">
+    <key alias="twofactorRegisterDashboard">Register 2fa</key>
+    <key alias="twofactorDeviceDashboard">Manage 2fa</key>
+    <key alias="twoFactorAdminDashboard">Code reset</key>
+    <key alias="twoFactorPermissionsDashboard">Set permissions</key>
+  </area>
+  <area alias="sections">
+    <key alias="2fa">2fa</key>
+  </area>
+</language>

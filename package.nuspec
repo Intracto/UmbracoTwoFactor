@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>UmbracoTwoFactor</id>
+    <version>1.0.0</version>
+    <authors>Thomas Maassen</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An extension for Umbraco 8 for two factor authentication in the umbraco backoffice</description>
+    <releaseNotes>First full release</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+    <tags>Umbraco 2fa TwoFactor</tags>
+	<dependencies>
+		<group targetFramework="net472">
+			<dependency id="UmbracoCms.Core" version="8.1.0" />
+			<dependency id="UmbracoCms.Web" version="8.1.0" />
+			<dependency id="Otp.NET" version="1.2.2" />
+		</group>
+	</dependencies>
+  </metadata>
+  <files>
+    <file src="TestSite\bin\TwoFactorAuth.dll" target="lib\net472" />
+	<file src="TestSite\bin\TwoFactorAuth.pdb" target="lib\net472" />
+	<file src="TestSite\App_Plugins\TwoFactor\**" target="Content\App_Plugins\TwoFactor" />
+  </files>
+</package>

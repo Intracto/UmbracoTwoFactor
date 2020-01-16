@@ -1,0 +1,20 @@
+﻿{
+  "javascript": [
+    "~/App_Plugins/TwoFactor/Constants.js",
+    "~/App_Plugins/TwoFactor/Controllers/AdminDashboard.controller.js",
+    "~/App_Plugins/TwoFactor/Controllers/DeviceManagement.controller.js",
+    "~/App_Plugins/TwoFactor/Controllers/ForceRegister.controller.js",
+    "~/App_Plugins/TwoFactor/Controllers/Login.controller.js",
+    "~/App_Plugins/TwoFactor/Controllers/PermissionsDashboard.controller.js",
+    "~/App_Plugins/TwoFactor/Controllers/RegisterDashboard.controller.js",
+    "~/App_Plugins/TwoFactor/Directives/qrGen.directive.js",
+    "~/App_Plugins/TwoFactor/Services/adminGroup.service.js",
+    "~/App_Plugins/TwoFactor/Services/adminUser.service.js",
+    "~/App_Plugins/TwoFactor/Services/cookie.service.js",
+    "~/App_Plugins/TwoFactor/Services/device.service.js",
+    "~/App_Plugins/TwoFactor/Services/publicCookie.service.js",
+    "~/App_Plugins/TwoFactor/Services/publicRegister.service.js",
+    "~/App_Plugins/TwoFactor/Services/register.service.js",
+    "~/App_Plugins/TwoFactor/Services/twoFactorUser.service.js"
+  ]
+}

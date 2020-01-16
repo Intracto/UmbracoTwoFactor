@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div ng-controller="TwoFactor.PermissionsDashboard">
+        <div ng-if="error != ''" ng-include="'/App_Plugins/TwoFactor/Views/ErrorMessage.html'"></div>
+        <div class="umb-table">
+
+            <div class="umb-table-head">
+                <div class="umb-table-row">
+                    <div class="umb-table-cell"></div>
+                    <div class="umb-table-cell"><localize key="general_name">Name</localize></div>
+                    <div class="umb-table-cell">2fa required</div>
+                    <div class="umb-table-cell">Allow mobile app</div>
+                    <div class="umb-table-cell">Allow mail 2fa</div>
+                </div>
+            </div>
+
+            <div class="umb-table-body">
+                <div class="umb-table-row"
+                     ng-repeat="group in groups">
+
+                    <div class="umb-table-cell">
+                        <i ng-if="group.Icon" class="umb-table-body__icon umb-table-body__fileicon {{ group.Icon }}"></i>
+                        <i class="umb-table-body__icon umb-table-body__checkicon icon-check"></i>
+                    </div>
+                    <div class="umb-table-cell">
+                        {{group.Name}}
+                    </div>
+                    <div class="umb-table-cell">
+                        <input type="checkbox" ng-disabled="!(group.TotpAllowed || group.MailAllowed)" ng-click="group.IsDirty = true" ng-model="group.Required" class="custom-control-input">
+                    </div>
+                    <div class="umb-table-cell">
+                        <input type="checkbox" ng-disabled="group.Required && group.TotpAllowed && !group.MailAllowed" ng-click="group.IsDirty = true" ng-model="group.TotpAllowed" class="custom-control-input">
+                    </div>
+                    <div class="umb-table-cell">
+                        <input type="checkbox" ng-disabled="group.Required && !group.TotpAllowed && group.MailAllowed" ng-click="group.IsDirty = true" ng-model="group.MailAllowed" class="custom-control-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pagination">
+            <umb-button type="button"
+                        action="save()"
+                        button-style="success"
+                        shortcut="ctrl+s"
+                        label="Save"
+                        label-key="buttons_save">
+            </umb-button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div ng-controller="TwoFactor.AdminDashboard">
+        <div ng-if="error != ''" ng-include="'/App_Plugins/TwoFactor/Views/ErrorMessage.html'"></div>
+        <div class="umb-listview">
+            <div class="umb-table">
+                <div class="umb-table-head">
+                    <div class="umb-table-row">
+                        <div class="umb-table-cell">Id</div>
+                        <div class="umb-table-cell"><localize key="general_name">Name</localize></div>
+                        <div class="umb-table-cell">Mail</div>
+                        <div class="umb-table-cell">Remove 2fa</div>
+                    </div>
+                </div>
+                <div class="umb-table-body">
+                    <div class="umb-table-row" ng-repeat="user in users">
+                        <div class="umb-table-cell">
+                            {{user.UserId}}
+                        </div>
+                        <div class="umb-table-cell">
+                            {{user.Name}}
+                        </div>
+                        <div class="umb-table-cell">
+                            {{user.Mail}}
+                        </div>
+                        <div class="umb-table-cell">
+                            <input ng-if="user.Enabled"
+                                   type="checkbox"
+                                   ng-model="user.Checked" />
+                            <span ng-if="!user.Enabled">Not Activated</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pagination">
+                <umb-button type="button"
+                            action="deleteDevices()"
+                            button-style="danger"
+                            label="Remove 2fa from selected users">
+                </umb-button>
+            </div>
+            <div class="pagination" ng-show="totalPages > 1">
+                <ul>
+                    <li ng-click="previous()" ng-class="{disabled:currentPage <= 1}">
+                        <a href="#" ng-click="previous()" prevent-default>
+                            Previous
+                        </a>
+                    </li>
+                    <li ng-repeat="page in pages" ng-class="{active:page == currentPage}">
+                        <a href="#" ng-click="goTo(page)" prevent-default>{{page}}</a>
+                    </li>
+                    <li ng-class="{disabled:currentPage >= totalPages}">
+                        <a href="#" ng-click="next()" prevent-default>
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

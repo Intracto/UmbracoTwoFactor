@@ -1,0 +1,67 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
+</head>
+<body>
+    <div ng-controller="TwoFactor.ForceRegister">
+        <div ng-if="error != ''" ng-include="'/App_Plugins/TwoFactor/Views/ErrorMessage.html'"></div>
+        <p>
+            Your account is required to have 2fa enabled.<br />
+            Please add a device to your account before logging in.
+        </p>
+        <div ng-if="totpAllowed === true">
+            <h2>Mobile authentication</h2>
+            <form ng-submit="validateTotpAndSave(totpCode)">
+                <div ng-if="QRLoaded === true" id="qr" qr-gen></div>
+                <br />
+                {{secret}}
+                <br />
+                <input type="text" ng-model="totpCode" />
+                <br />
+                <div ng-if="correctCode === false">
+                    code was incorrect<br />
+                </div>
+                <umb-button type="submit"
+                            button-style="success"
+                            label="Save Device">
+                </umb-button>
+            </form>
+        </div>
+        <div ng-if="mailAllowed">
+            <h2>Mail authentication</h2>
+            <div ng-if="mailEnabled === false">
+                <p>If you enable mail authentication you can send a code to the mail address of your account everytime you login</p>
+                <umb-button type="button"
+                            action="enableMail()"
+                            button-style="succes"
+                            label="Enable mail authentication">
+                </umb-button>
+            </div>
+            <div ng-if="mailEnabled === true">
+                <p>You can send a mail with your 2fa code, than enter the code here</p>
+                <form ng-submit="validateMail(mailCode)" class="text-center">
+                    <input type="text" ng-model="mailCode" />
+                    <br />
+                    <div ng-if="correctMailCode === false">
+                        code was incorrect<br />
+                    </div>
+                    <umb-button type="button"
+                                action="sendMail()"
+                                button-style="info"
+                                label="Send Email">
+                    </umb-button>
+                    <umb-button type="submit"
+                                button-style="success"
+                                label="Validate code">
+                    </umb-button>
+                </form>
+                <div ng-if="mailSend === true">
+                    <br />
+                    <p>A mail with your 2fa code has been sent to your Email</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
